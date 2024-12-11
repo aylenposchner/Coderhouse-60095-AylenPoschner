@@ -7,7 +7,7 @@ class UsuarioAdmin(admin.ModelAdmin):
 
 @admin.register(Transaccion)
 class TransaccionAdmin(admin.ModelAdmin):
-    list_display = ("fecha","tipo","monto")
+    list_display = ("fecha","tipo","categoria","monto")
 
 @admin.register(Informe)
 class InformesAdmin(admin.ModelAdmin):
