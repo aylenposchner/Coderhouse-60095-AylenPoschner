@@ -3,6 +3,9 @@ from django.db import models
 class Usuario(models.Model):
     nombre = models.CharField(max_length=15, unique=True)
 
+    def __str__(self):
+        return self.nombre
+
 class Transaccion(models.Model):
     nombre = models.ForeignKey(Usuario,on_delete=models.CASCADE)
     tipo_transaccion =[("I","Ingreso"),("G","Gasto")]
@@ -39,4 +42,4 @@ class Informe(models.Model):
 
 
     class Meta():
-        constraints = [models.UniqueConstraint(fields=["año","informe"], name="unico_informe_por_año")]
+        constraints = [models.UniqueConstraint(fields=["año","categoria","periodo"], name="unico_informe_por_año")]
