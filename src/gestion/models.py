@@ -14,5 +14,5 @@ class Informe(models.Model):
     año = models.PositiveIntegerField()
     informe = models.CharField(max_length=25)
 
-    # class Meta():
-    #     validacion = [models.UniqueConstraint(fields=["año","informe"], name="unico_informe por año")]
+    class Meta():
+        constraints = [models.UniqueConstraint(fields=["año","informe"], name="unico_informe_por_año")]
