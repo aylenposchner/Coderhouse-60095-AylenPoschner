@@ -8,4 +8,5 @@
             <p>{{ object.nombre }} | {{ object.tipo}} | {{ object.monto }} | {{ object.categoria }} | {{ object.descripcion }} | {{ object.fecha }}</p>
         {% endfor %}
     </ul>
+    <a href="{% url 'gestion:index' %}"><button>Volver al inicio</button></a>
 {% endblock contenido %}
