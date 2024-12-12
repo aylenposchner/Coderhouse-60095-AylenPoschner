@@ -1,6 +1,10 @@
 {% extends 'gestion/base.html' %}
 
 {% block contenido %}
-    <h1> Bienvenido a Gestión Financiera Familiar</h1>
-
+    <main >
+        <h1>Bienvenido</h1>
+        <a href="{% url 'gestion:usuario_list' %}"><button>Mostrar Usuarios</button></a>
+        <a href="{% url 'gestion:transaccion_list' %}"><button>Mostrar Transacciones</button></a>
+        <a href="{% url 'gestion:informe_list' %}"><button>Mostrar Informes</button></a>
+    </main>
 {% endblock contenido %}

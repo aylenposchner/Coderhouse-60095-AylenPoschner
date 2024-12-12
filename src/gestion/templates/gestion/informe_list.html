@@ -1,0 +1,11 @@
+{% extends 'gestion/base.html' %}
+
+{% block contenido %}
+    <h1>Lista de Informes</h1>
+    <a href="{% url 'gestion:informe_create' %}"><button>Crear Informe</button></a>
+    <ul>
+        {% for object in object_list %}
+            <p>{{ object.nombre }}</p>
+        {% endfor %}
+    </ul>
+{% endblock contenido %}

@@ -1,0 +1,11 @@
+{% extends 'gestion/base.html' %}
+
+{% block contenido %}
+    <h1>Lista de Transacciones</h1>
+    <a href="{% url 'gestion:transaccion_create' %}"><button>Crear Transaccion</button></a>
+    <ul>
+        {% for object in object_list %}
+            <p>{{ object.nombre }} | {{ object.tipo}} | {{ object.monto }} | {{ object.categoria }} | {{ object.descripcion }} | {{ object.fecha }}</p>
+        {% endfor %}
+    </ul>
+{% endblock contenido %}

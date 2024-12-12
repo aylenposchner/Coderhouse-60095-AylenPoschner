@@ -1,0 +1,20 @@
+{% extends 'gestion/base.html' %}
+
+{% block contenido %}
+    <h1>Lista de Usuarios</h1>
+    <a href="{% url 'gestion:usuario_create' %}"><button>Crear Usuario</button></a>
+    <table>
+        <thead>
+            <tr>
+                <th>nombre</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for object in object_list %}
+                <tr>
+                    <td>{{ object.nombre }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock contenido %}
