@@ -22,21 +22,6 @@ PERIODOS = [
     ('TRIMESTRAL', 'Trimestral'),
     ('ANUAL', 'Anual'),
 ]
-# def normalizar_texto(texto: str) -> str:
-#     """Transforma el texto a una forma normalizada NFD
-#     (Normalization Form Decomposition).
-#     Esto significa que los caracteres compuestos,
-#     como las letras con tildes o diacríticos,
-#     se descomponen en su forma base y sus marcas diacríticas separadas.
-#     Ej: la letra "é" se descompone en "e" + un carácter de tilde combinable (U+0301).
-#     Convierte la cadena en bytes usando la codificación ASCII.
-#     Si un carácter no puede representarse en ASCII (por ejemplo, una "ñ" o una "é"),
-#     se ignora debido al parámetro "ignore".
-#     Luego, convierte los bytes resultantes nuevamente a una cadena de texto utilizando la codificación UTF-8."""
-#     texto = unicodedata.normalize("NFD", texto)
-#     texto = texto.encode("ascii", "ignore").decode("utf-8")
-#     return texto
-
 class Usuario(models.Model):
     nombre = models.CharField(max_length=15, unique=True)
 

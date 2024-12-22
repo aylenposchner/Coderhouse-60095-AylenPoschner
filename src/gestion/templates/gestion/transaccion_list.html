@@ -1,12 +1,27 @@
 {% extends 'gestion/base.html' %}
 
 {% block contenido %}
+{% load humanize %}
     <h1>Lista de Transacciones</h1>
     <a href="{% url 'gestion:transaccion_create' %}"><button>Crear Transaccion</button></a>
-    <ul>
-        {% for object in object_list %}
-            <p>{{ object.nombre }} | {{ object.tipo}} | {{ object.monto }} | {{ object.categoria }} | {{ object.descripcion }} | {{ object.fecha }}</p>
-        {% endfor %}
-    </ul>
+    <table>
+        <thead>
+            <tr> 
+                <th>Transacciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for object in object_list %}
+                <tr>
+                    <td>{{ object.nombre }} | {{ object.get_tipo_display}} | {{ object.monto|intcomma }} | {{ object.get_categoria_display }} | {{ object.descripcion }} | {{ object.fecha }} </td>
+                </tr    >
+            {% empty %}
+                <tr>
+                    <td>No hay datos disponibles.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
     <a href="{% url 'gestion:index' %}"><button>Volver al inicio</button></a>
 {% endblock contenido %}
