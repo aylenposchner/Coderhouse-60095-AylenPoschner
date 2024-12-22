@@ -1,4 +1,4 @@
-{% extends 'gestion/base.html' %}
+{% extends 'core/base.html' %}
 
 {% block contenido %}
 {% load humanize %}
@@ -34,5 +34,5 @@
         </tbody>
     </table>
 
-    <a href="{% url 'gestion:index' %}"><button>Volver al inicio</button></a>
+    <a href="{% url 'core:index' %}"><button>Volver al inicio</button></a>
 {% endblock contenido %}

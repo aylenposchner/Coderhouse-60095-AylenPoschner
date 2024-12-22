@@ -29,6 +29,7 @@ class Usuario(models.Model):
     dni = models.IntegerField(unique=True,null=True)
     fecha_nacimiento = models.DateField()
 
+    @property
     def calcular_edad(self):
         hoy = datetime.today()
         if hoy.month < self.fecha_nacimiento.month:

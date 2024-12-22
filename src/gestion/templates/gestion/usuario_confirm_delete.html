@@ -1,4 +1,4 @@
-{% extends 'gestion/base.html' %}
+{% extends 'core/base.html' %}
 
 {% block contenido %}
     <h1>Eliminar Usuario</h1>
@@ -8,5 +8,5 @@
         <button type="submit">Si, confirmo</button>
     </form>
 
-    <a href="{% url 'gestion:usuario_list' %}"><button>Volver a transacciones</button></a>
+    <a href="{% url 'gestion:usuario_list' %}"><button>Volver a Usuarios</button></a>
 {% endblock contenido %}

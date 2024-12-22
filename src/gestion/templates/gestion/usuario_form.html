@@ -1,4 +1,4 @@
-{% extends 'gestion/base.html' %}
+{% extends 'core/base.html' %}
 
 {% block contenido %}
     <h1>Crear Usuario</h1>
@@ -7,5 +7,5 @@
         {{ form.as_p }}
         <button type="submit">Guardar</button>
     </form>
-    <a href="{% url 'gestion:index' %}"><button>Volver al inicio</button></a>
+    <a href="{% url 'gestion:usuario_list' %}"><button>Volver a Usuarios</button></a>
 {% endblock contenido %}

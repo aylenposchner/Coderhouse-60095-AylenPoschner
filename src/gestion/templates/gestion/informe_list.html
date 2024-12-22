@@ -1,4 +1,4 @@
-{% extends 'gestion/base.html' %}
+{% extends 'core/base.html' %}
 
 {% block contenido %}
     <h1>Lista de Informes</h1>
@@ -8,5 +8,5 @@
             <p>{{object.nombre}} - {{ object.informe }}</p>
         {% endfor %}
     </ul>
-    <a href="{% url 'gestion:index' %}"><button>Volver al inicio</button></a>
+    <a href="{% url 'core:index' %}"><button>Volver al inicio</button></a>
 {% endblock contenido %}

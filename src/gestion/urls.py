@@ -1,14 +1,9 @@
 from django.urls import path
-from .views import (index, about)
 from .views_models import transaccion, usuario, informe
 
 app_name = "gestion"
 
 urlpatterns = [
-    path('', index, name="index"),
-    path('about/', about, name="about"),]
-
-urlpatterns += [
     path("usuario/list/", usuario.UsuarioListView.as_view(), name="usuario_list"),
     path("usuario/create/", usuario.UsuarioCreateView.as_view(), name="usuario_create"),
     path("usuario/update/<int:pk>", usuario.UsuarioUpdateView.as_view(), name="usuario_update"),
