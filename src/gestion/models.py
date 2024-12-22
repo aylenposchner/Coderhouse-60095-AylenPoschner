@@ -36,6 +36,10 @@ class Transaccion(models.Model):
     descripcion = models.TextField(max_length=50,null=True,blank=True)
     fecha = models.DateField(null=True,blank=True)
 
+    class Meta:
+        verbose_name = "Transaccion"
+        verbose_name_plural = "Transacciones"
+
 class Informe(models.Model):
     nombre = models.ForeignKey(Usuario,on_delete=models.CASCADE,null=True)
     año = models.PositiveIntegerField()
@@ -44,4 +48,4 @@ class Informe(models.Model):
     periodo = models.CharField(max_length=10,choices=PERIODOS,default='ANUAL')
 
     class Meta():
-        constraints = [models.UniqueConstraint(fields=["año","categoria","periodo"], name="unico_informe_por_año")]
+        unique_together = ("año","categoria","periodo")

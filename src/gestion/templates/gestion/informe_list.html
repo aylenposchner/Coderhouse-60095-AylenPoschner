@@ -5,7 +5,7 @@
     <a href="{% url 'gestion:informe_create' %}"><button>Crear Informe</button></a>
     <ul>
         {% for object in object_list %}
-            <p>{{ object.nombre }}</p>
+            <p>{{object.nombre}} - {{ object.informe }}</p>
         {% endfor %}
     </ul>
     <a href="{% url 'gestion:index' %}"><button>Volver al inicio</button></a>
