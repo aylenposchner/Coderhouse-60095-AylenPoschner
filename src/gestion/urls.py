@@ -9,8 +9,11 @@ urlpatterns = [
     path('about/', about, name="about"),]
 
 urlpatterns += [
-    path("usuario/list/", usuario.usuario_list, name="usuario_list"),
-    path("usuario/create/", usuario.usuario_create, name="usuario_create"),]
+    path("usuario/list/", usuario.UsuarioListView.as_view(), name="usuario_list"),
+    path("usuario/create/", usuario.UsuarioCreateView.as_view(), name="usuario_create"),
+    path("usuario/update/<int:pk>", usuario.UsuarioUpdateView.as_view(), name="usuario_update"),
+    path("usuario/delete/<int:pk>/", usuario.UsuarioDeleteView.as_view(), name="usuario_delete"),
+    ]
 
 urlpatterns += [
     path("transaccion/list/", transaccion.TransaccionListView.as_view(), name="transaccion_list"),

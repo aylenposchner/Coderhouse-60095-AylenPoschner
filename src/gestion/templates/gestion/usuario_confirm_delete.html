@@ -1,0 +1,12 @@
+{% extends 'gestion/base.html' %}
+
+{% block contenido %}
+    <h1>Eliminar Usuario</h1>
+    <p>¿Está seguro que desea eliminar el usuario {{object.name}}</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Si, confirmo</button>
+    </form>
+
+    <a href="{% url 'gestion:usuario_list' %}"><button>Volver a transacciones</button></a>
+{% endblock contenido %}

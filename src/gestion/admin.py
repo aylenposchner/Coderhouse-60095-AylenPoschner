@@ -3,7 +3,7 @@ from .models import Usuario, Transaccion, Informe
 
 @admin.register(Usuario)
 class UsuarioAdmin(admin.ModelAdmin):
-    list_display = ("nombre",)
+    list_display = ("nombre","dni","fecha_nacimiento")
 
 @admin.register(Transaccion)
 class TransaccionAdmin(admin.ModelAdmin):

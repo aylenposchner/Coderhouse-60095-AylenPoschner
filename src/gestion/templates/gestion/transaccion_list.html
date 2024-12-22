@@ -3,6 +3,11 @@
 {% block contenido %}
 {% load humanize %}
     <h1>Lista de Transacciones</h1>
+
+    <form action="" method="get">
+        <input type="text", name="busqueda", placeholder="Buscar categoría...">
+    </form>
+    
     <a href="{% url 'gestion:transaccion_create' %}"><button>Crear Transaccion</button></a>
     <table>
         <thead>
