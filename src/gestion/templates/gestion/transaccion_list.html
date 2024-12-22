@@ -8,12 +8,18 @@
         <thead>
             <tr> 
                 <th>Transacciones</th>
+                <th>Acción</th>
             </tr>
         </thead>
         <tbody>
             {% for object in object_list %}
                 <tr>
-                    <td>{{ object.nombre }} | {{ object.get_tipo_display}} | {{ object.monto|intcomma }} | {{ object.get_categoria_display }} | {{ object.descripcion }} | {{ object.fecha }} </td>
+                    <td>{{ object.nombre }} | {{ object.get_tipo_display}} | {{ object.monto|intcomma }} | {{ object.get_categoria_display }} </td>
+                    <td>
+                        <a href="{% url 'gestion:transaccion_detail' object.id %}">Ver | </a>
+                        <a href="{% url 'gestion:transaccion_update' object.id %}">Editar | </a>
+                        <a href="{% url 'gestion:transaccion_delete' object.id %}">Eliminar</a>
+                    </td>
                 </tr    >
             {% empty %}
                 <tr>

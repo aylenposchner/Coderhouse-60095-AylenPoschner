@@ -1,17 +1,12 @@
 {% extends 'gestion/base.html' %}
 
 {% block contenido %}
-    {% if form.instance.pk %}
-        <h1>Modificar Transaccion</h1>
-    {% else %}
-    <h1>Crear Transaccion</h1>
-    {% endif %}
-
+    <h1>Eliminar Transacción</h1>
+    <p>¿Está seguro que desea eliminar la transacción {{object.get_categoria_display}} del {{object.fecha}}?</p>
     <form method="post">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Guardar</button>
+        <button type="submit">Si, confirmo</button>
     </form>
-    
+
     <a href="{% url 'gestion:transaccion_list' %}"><button>Volver a transacciones</button></a>
 {% endblock contenido %}
