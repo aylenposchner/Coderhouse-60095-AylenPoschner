@@ -2,11 +2,40 @@
 
 {% block contenido %}
     <h1>Lista de Informes</h1>
+<!-- 
+    <form action="" method="get">
+        <input type="text", name="busqueda", placeholder="Buscar categoría...">
+    </form>
+     -->
     <a href="{% url 'gestion:informe_create' %}"><button>Crear Informe</button></a>
-    <ul>
-        {% for object in object_list %}
-            <p>{{object.nombre}} - {{ object.informe }}</p>
-        {% endfor %}
-    </ul>
+    <table>
+        <thead>
+            <tr> 
+                <th>Nombre</th>
+                <th>Informe</th>
+                <th>Año</th>
+                <th>Acción</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for object in object_list %}
+                <tr>
+                    <td>{{ object.nombre }}</td>
+                    <td>{{ object.informe}}</td>
+                    <td>{{ object.año}}</td>
+                    <td>
+                        <a href="{% url 'gestion:transaccion_detail' object.id %}">Ver | </a>
+                        <a href="{% url 'gestion:transaccion_update' object.id %}">Editar | </a>
+                        <a href="{% url 'gestion:transaccion_delete' object.id %}">Eliminar</a>
+                    </td>
+                </tr    >
+            {% empty %}
+                <tr>
+                    <td>No hay datos disponibles.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
     <a href="{% url 'core:index' %}"><button>Volver al inicio</button></a>
 {% endblock contenido %}

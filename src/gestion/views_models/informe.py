@@ -1,20 +1,27 @@
-from django.shortcuts import render, redirect
-from django.http import HttpRequest, HttpResponse
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
 from ..forms import InformeForm
 from ..models import Informe
-
-def informe_list(request: HttpRequest) -> HttpResponse:
-    query = Informe.objects.all()
-    context = {"object_list": query}
-    return render(request, "gestion/informe_list.html", context)
+from django.urls import reverse_lazy
 
 
-def informe_create(request: HttpRequest) -> HttpResponse:
-    if request.method == "GET":
-        form = InformeForm()
-    if request.method == "POST":
-        form = InformeForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect("gestion:informe_list")
-    return render(request, "gestion/informe_form.html", {"form": form})
+class InformeListView(ListView):
+    model = Informe
+    template_name = "gestion/informe_list.html"
+    context_object_name = "object_list"
+
+class InformeCreateView(CreateView):
+    model = Informe
+    form_class = InformeForm
+    success_url = reverse_lazy("gestion:informe_list")
+
+class InformeUpdateView(UpdateView):
+    model = Informe
+    form_class = InformeForm
+    success_url = reverse_lazy("gestion:informe_list")
+
+class InformeDetailView(DetailView):
+    model = Informe
+
+class InformeDeleteView(DeleteView):
+    model = Informe
+    success_url = reverse_lazy("gestion:informe_list")

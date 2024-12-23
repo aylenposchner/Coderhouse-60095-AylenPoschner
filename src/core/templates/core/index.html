@@ -1,10 +1,18 @@
 {% extends 'core/base.html' %}
 
 {% block contenido %}
-    <main >
-        <h1>Bienvenido</h1>
+    <h1>Bienvenido</h1>
+    <div>
         <a href="{% url 'gestion:usuario_list' %}"><button>Mostrar Usuarios</button></a>
         <a href="{% url 'gestion:transaccion_list' %}"><button>Mostrar Transacciones</button></a>
         <a href="{% url 'gestion:informe_list' %}"><button>Mostrar Informes</button></a>
-    </main>
+    </div>
+
+    <div>
+        <form action="{% url 'core:logout' %}" method="post">
+            {% csrf_token %}
+            <button type="submit" style="background:none;border:none;color: blueviolet;">Cerrar Sesión</button>
+        </form>
+    </div>
+
 {% endblock contenido %}

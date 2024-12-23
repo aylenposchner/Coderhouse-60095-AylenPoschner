@@ -13,16 +13,16 @@ CATEGORIAS = [("A","Alimentos"),
              ("O","Otros")]
 
 TIPOS_INFORME = [
-    ('ING', 'Ingreso'),
-    ('GAS', 'Gasto'),
-    ('BAL', 'Balance General'),
-]
+        ('ING', 'Ingreso'),
+        ('GAS', 'Gasto'),
+        ('BAL', 'Balance General'),
+    ]
 
 PERIODOS = [
-    ('MENSUAL', 'Mensual'),
-    ('TRIMESTRAL', 'Trimestral'),
-    ('ANUAL', 'Anual'),
-]
+        ('MENSUAL', 'Mensual'),
+        ('TRIMESTRAL', 'Trimestral'),
+        ('ANUAL', 'Anual'),
+    ]
 
 class Usuario(models.Model):
     nombre = models.CharField(max_length=15)
