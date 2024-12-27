@@ -21,6 +21,6 @@ urlpatterns += [
     path("informe/list/", informe.InformeListView.as_view(), name="informe_list"),
     path("informe/create/", informe.InformeCreateView.as_view(), name="informe_create"),
     path("informe/update/<int:pk>", informe.InformeUpdateView.as_view(), name="informe_update"),
-    path("transaccion/detail/<int:pk>", informe.InformeDetailView.as_view(), name="informe_detail"),
+    path("informe/detail/<int:pk>", informe.InformeDetailView.as_view(), name="informe_detail"),
     path("informe/delete/<int:pk>/", informe.InformeDeleteView.as_view(), name="informe_delete"),
     ]

@@ -24,9 +24,9 @@
                     <td>{{ object.informe}}</td>
                     <td>{{ object.año}}</td>
                     <td>
-                        <a href="{% url 'gestion:transaccion_detail' object.id %}">Ver | </a>
-                        <a href="{% url 'gestion:transaccion_update' object.id %}">Editar | </a>
-                        <a href="{% url 'gestion:transaccion_delete' object.id %}">Eliminar</a>
+                        <a href="{% url 'gestion:informe_detail' object.id %}">Ver | </a>
+                        <a href="{% url 'gestion:informe_update' object.id %}">Editar | </a>
+                        <a href="{% url 'gestion:informe_delete' object.id %}">Eliminar</a>
                     </td>
                 </tr    >
             {% empty %}

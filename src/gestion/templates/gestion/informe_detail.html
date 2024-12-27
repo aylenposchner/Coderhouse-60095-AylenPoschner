@@ -1,0 +1,14 @@
+{% extends 'core/base.html' %}
+
+{% block contenido %}
+{% load humanize %}
+    <h1>Detalle Transacción</h1>
+
+    <ul>
+        <li><strong>Nombre:</strong> {{object.nombre}}</li>
+        <li><strong>Año:</strong> {{object.año}}</li>
+        <li><strong>Informe:</strong> {{object.informe}}</li>
+        <li><strong>Periodo: </strong>{{object.get_periodo_display}}</li>
+     <br>
+    <a href="{% url 'gestion:informe_list' %}"><button>Volver a Informes</button></a>
+{% endblock contenido %}

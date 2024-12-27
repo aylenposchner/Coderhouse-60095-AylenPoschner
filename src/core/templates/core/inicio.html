@@ -1,0 +1,9 @@
+{% extends 'core/base.html' %}
+
+{% block contenido %}
+    <h1>Gestion Financiera Familiar</h1>
+    <div>
+        <a href="{% url 'core:login' %}"><button>Iniciar Sesión</button></a>
+        <a href="{% url 'core:about' %}"><button>About Me</button></a>
+
+{% endblock contenido %}

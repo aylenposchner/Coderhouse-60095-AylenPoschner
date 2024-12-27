@@ -7,6 +7,13 @@
         <a href="{% url 'gestion:transaccion_list' %}"><button>Mostrar Transacciones</button></a>
         <a href="{% url 'gestion:informe_list' %}"><button>Mostrar Informes</button></a>
     </div>
+    <br>
+    <div>
+        <form action="{% url 'core:perfil' %}" method="post">
+            {% csrf_token %}
+            <button type="submit" style="background:none;border:none;color: blueviolet;">Modificar Usuario</button>
+        </form>
+    </div>
 
     <div>
         <form action="{% url 'core:logout' %}" method="post">
