@@ -2,7 +2,7 @@
 
 {% block contenido %}
     <h1>Eliminar Informe</h1>
-    <p>¿Está seguro que desea eliminar el usuario {{object.name}}</p>
+    <p>¿Está seguro que desea eliminar el informe {{object.name}}</p>
     <form method="post">
         {% csrf_token %}
         <button type="submit">Si, confirmo</button>
