@@ -3,6 +3,7 @@ from datetime import datetime, date
 from django.contrib.auth.models import User
 from django.db.models import Sum
 from calendar import monthrange
+from django.core.exceptions import ValidationError
 
 TIPOS_TRANSACCIONES =[("I","Ingreso"),("G","Gasto")]
 
@@ -32,6 +33,7 @@ class Usuario(models.Model):
     usuario = models.OneToOneField(User, on_delete=models.CASCADE, related_name='Usuario')
     dni = models.IntegerField(unique=True,null=True)
     fecha_nacimiento = models.DateField()
+    foto = models.ImageField(upload_to='imagenes_perfil', blank=True, null=True)
 
     @property
     def calcular_edad(self):
@@ -64,47 +66,24 @@ class Informe(models.Model):
     informe = models.CharField(max_length=25)
     tipo = models.CharField(max_length=3,choices=TIPOS_INFORME,default='BAL')
     periodo = models.CharField(max_length=10,choices=PERIODOS,default='ANUAL')
+    mes_inicio = models.PositiveIntegerField(default=1)  
+    mes_fin = models.PositiveIntegerField(default=12)    
 
     class Meta():
         unique_together = ("año","tipo","periodo")
-    
-    def calcular_totales_periodo(self):
-        if self.periodo == 'MENSUAL':
-             return self._calcular_totales_mensuales(1)
 
-        elif self.periodo == 'TRIMESTRAL':
-            # Últimos 3 meses
-            return self._calcular_totales_mensuales(3)
-        
-        elif self.periodo == 'SEMESTRAL':
-            # Últimos 6 meses
-            return self._calcular_totales_mensuales(3)
+    def clean(self):
+        """Valida que mes_inicio y mes_fin sean valores lógicos."""
+        if self.mes_inicio and self.mes_fin:
+            if not (1 <= self.mes_inicio <= 12) or not (1 <= self.mes_fin <= 12):
+                raise ValidationError("Los meses deben estar entre 1 y 12.")
+            if self.mes_inicio > self.mes_fin:
+                raise ValidationError("El mes de inicio no puede ser mayor que el mes final.")
 
-        elif self.periodo == 'ANUAL':
-            # Últimos 12 meses
-            return self._calcular_totales_mensuales(12)
-
-        return []
-
-    def _calcular_totales_mensuales(self, meses):
-        hoy = date.today()
-        totales = []
-        for i in range(meses):
-            mes = (hoy.month - i - 1) % 12 + 1
-            año = hoy.year - ((hoy.month - i - 1) // 12)
-            inicio_mes = date(año, mes, 1)
-            _, fin_dia = monthrange(año, mes)
-            fin_mes = date(año, mes, fin_dia)
-            ingresos, gastos, total = self._calcular_total_rango(inicio_mes, fin_mes)
-            totales.append((inicio_mes.strftime("%b %Y"), ingresos, gastos, total))
-        totales.reverse()
-        return totales
-
-    def _calcular_total_rango(self, inicio, fin):
+    def calcular_total_rango(self, inicio, fin):
         suma_ingresos = 0
         suma_gastos = 0
-        total = 0
-        total = 0
+        suma_total = 0
         if self.tipo == 'ING':  # Ingresos
             total = Transaccion.objects.filter(
                 nombre=self.nombre,
@@ -112,7 +91,7 @@ class Informe(models.Model):
                 fecha__range=[inicio, fin]
             )
             suma_total = total.aggregate(total=Sum('monto'))['total'] or 0
-            return suma_total, 0, suma_total
+            return suma_total, 0, 0
         
         elif self.tipo == 'GAS':  # Gastos
             total = Transaccion.objects.filter(
@@ -121,7 +100,7 @@ class Informe(models.Model):
                 fecha__range=[inicio, fin]
             )
             suma_total = total.aggregate(total=Sum('monto'))['total'] or 0
-            return 0, suma_total, suma_total
+            return 0, suma_total, 0
         
         elif self.tipo == 'BAL':  # Balance
             ingresos = Transaccion.objects.filter(
@@ -140,3 +119,14 @@ class Informe(models.Model):
             return suma_ingresos, suma_gastos, suma_total
         else:
             return 0,0,0
+    
+    def calcular_totales_mensuales(self):
+        totales = []
+        for mes in range(self.mes_inicio, self.mes_fin + 1):
+            inicio_mes = date(self.año, mes, 1)
+            _, fin_dia = monthrange(self.año, mes)
+            fin_mes = date(self.año, mes, fin_dia)
+
+            ingresos, gastos, total = self.calcular_total_rango(inicio_mes, fin_mes)
+            totales.append((inicio_mes.strftime("%b %Y"), ingresos, gastos, total))
+        return totales

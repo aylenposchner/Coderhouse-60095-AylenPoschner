@@ -7,6 +7,7 @@ urlpatterns = [
     path("usuario/list/", usuario.UsuarioListView.as_view(), name="usuario_list"),
     path("usuario/create/", usuario.UsuarioCreateView.as_view(), name="usuario_create"),
     path("usuario/update/<int:pk>", usuario.UsuarioUpdateView.as_view(), name="usuario_update"),
+    path("usuario/detail/<int:pk>", usuario.UsuarioDetailView.as_view(), name="usuario_detail"),
     path("usuario/delete/<int:pk>/", usuario.UsuarioDeleteView.as_view(), name="usuario_delete"),
     ]
 

@@ -3,6 +3,7 @@
 {% block contenido %}
     <h1>Lista de Usuarios</h1>
     <a href="{% url 'gestion:usuario_create' %}"><button>Crear Usuario</button></a>
+
     <table>
         <thead>
             <tr>
@@ -17,6 +18,7 @@
                     <td>{{object.calcular_edad}}</td>
                     <td>
                         <a href="{% url 'gestion:usuario_update' object.id %}">Editar | </a>
+                        <a href="{% url 'gestion:usuario_detail' object.id %}">Ver | </a>
                         <a href="{% url 'gestion:usuario_delete' object.id %}">Eliminar</a>
                     </td>
                 </tr>

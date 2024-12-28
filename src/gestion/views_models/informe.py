@@ -2,8 +2,6 @@ from django.views.generic import ListView, CreateView, UpdateView, DeleteView, D
 from ..forms import InformeForm
 from ..models import Informe
 from django.urls import reverse_lazy
-from django.views import View
-from django.shortcuts import render
 
 
 class InformeListView(ListView):
@@ -29,7 +27,7 @@ class InformeDetailView(DetailView):
         informe = self.get_object()  # Obtener el informe actual
 
         # Llamar a calcular_totales_periodo() sobre la instancia 'informe'
-        totales_periodo = informe.calcular_totales_periodo()
+        totales_periodo = informe.calcular_totales_mensuales()
 
         etiquetas = [etiqueta for etiqueta, _, _, _ in totales_periodo]
         ingresos = [float(ingresos) for _, ingresos, _, _,  in totales_periodo]
