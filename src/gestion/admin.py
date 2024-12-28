@@ -1,11 +1,9 @@
 from django.contrib import admin
-from .models import Usuario, Transaccion, Informe   
+from . import models
 
-@admin.register(Usuario)
-class UsuarioAdmin(admin.ModelAdmin):
-    list_display = ("nombre","dni","fecha_nacimiento")
+admin.site.register(models.Usuario)
 
-@admin.register(Transaccion)
+@admin.register(models.Transaccion)
 class TransaccionAdmin(admin.ModelAdmin):
     list_display = ("nombre","fecha","tipo","categoria","monto")
     list_display_links = ("nombre",)
@@ -13,6 +11,6 @@ class TransaccionAdmin(admin.ModelAdmin):
     search_fields = ("nombre__nombre",)
     list_per_page = 25
 
-@admin.register(Informe)
+@admin.register(models.Informe)
 class InformesAdmin(admin.ModelAdmin):
     list_display = ("nombre","año","informe")

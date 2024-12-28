@@ -1,5 +1,6 @@
 from django.db import models
 from datetime import datetime
+from django.contrib.auth.models import User
 
 TIPOS_TRANSACCIONES =[("I","Ingreso"),("G","Gasto")]
 
@@ -25,7 +26,7 @@ PERIODOS = [
     ]
 
 class Usuario(models.Model):
-    nombre = models.CharField(max_length=15)
+    usuario = models.OneToOneField(User, on_delete=models.CASCADE, related_name='Usuario')
     dni = models.IntegerField(unique=True,null=True)
     fecha_nacimiento = models.DateField()
 
@@ -39,10 +40,10 @@ class Usuario(models.Model):
         return edad
 
     def __str__(self):
-        return self.nombre
+        return self.usuario.username
 
 class Transaccion(models.Model):
-    nombre = models.ForeignKey(Usuario,on_delete=models.CASCADE)
+    nombre = models.ForeignKey(Usuario,on_delete=models.DO_NOTHING)
     tipo = models.CharField(max_length=1,choices=TIPOS_TRANSACCIONES)
     monto = models.DecimalField(max_digits=10,decimal_places=2)
     categoria = models.CharField(max_length=50,choices=CATEGORIAS,default="O")
@@ -52,6 +53,7 @@ class Transaccion(models.Model):
     class Meta:
         verbose_name = "Transaccion"
         verbose_name_plural = "Transacciones"
+        ordering = ("-fecha",)
 
 class Informe(models.Model):
     nombre = models.ForeignKey(Usuario,on_delete=models.CASCADE,null=True)
