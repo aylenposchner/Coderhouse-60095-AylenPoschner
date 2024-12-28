@@ -1,34 +1,58 @@
 {% extends 'core/base.html' %}
+{% load static %}
+
 
 {% block contenido %}
-    <h1>Lista de Usuarios</h1>
-    <a href="{% url 'gestion:usuario_create' %}"><button>Crear Usuario</button></a>
 
-    <table>
-        <thead>
-            <tr>
-                <th>Nombre</th><th>DNI</th><th>Edad</th><th>Acción</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for object in object_list %}
-                <tr>
-                    <td>{{object.usuario.username }}</td>
-                    <td>{{object.dni}}</td>
-                    <td>{{object.calcular_edad}}</td>
-                    <td>
-                        <a href="{% url 'gestion:usuario_update' object.id %}">Editar | </a>
-                        <a href="{% url 'gestion:usuario_detail' object.id %}">Ver | </a>
-                        <a href="{% url 'gestion:usuario_delete' object.id %}">Eliminar</a>
-                    </td>
-                </tr>
-            {% empty %}
-                <tr>
-                    <td> No hay usuarios creados</td>
-                </tr>
-            {% endfor %}
+<div class="container px-4 px-lg-5">
+    <div class="row justify-content-center my-5">
+        <div class="col-lg-8 text-center">
+            <h4 class="display-4 mb-4">Lista de Miembros</h4>
+        </div>
 
-        </tbody>
-    </table>
-    <a href="{% url 'core:index' %}"><button>Volver al inicio</button></a>
+        <div class="col-lg-8">
+            <a href="{% url 'gestion:usuario_create' %}" class="btn btn-primary mt-2" style="background-color: plum; border-color: plum; color: black; padding-left: 30px; padding-right: 30px;">Crear Miembro</a>
+        </div>
+
+        <div class="col-lg-8 text-center mt-4">
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>DNI</th>
+                            <th>Edad</th>
+                            <th>Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for object in object_list %}
+                            <tr>
+                                <td>{{ object.usuario.username }}</td>
+                                <td>{{ object.dni }}</td>
+                                <td>{{ object.calcular_edad }}</td>
+                                <td>
+                                    <a href="{% url 'gestion:usuario_update' object.id %}" class="btn btn-warning btn-sm" style="background-color:plum;border-color: plum; color: black;">Editar</a>
+                                    <a href="{% url 'gestion:usuario_detail' object.id %}" class="btn btn-info btn-sm" style="background-color:plum;border-color: plum;color: black;">Ver</a>
+                                    <a href="{% url 'gestion:usuario_delete' object.id %}" class="btn btn-danger btn-sm" style="background-color: plum;border-color: plum;color: black;">Eliminar</a>
+                                </td>
+                            </tr>
+                        {% empty %}
+                            <tr>
+                                <td colspan="4" class="text-center">No hay usuarios creados</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-lg-8 mt-4">
+            <a href="{% url 'core:index' %}" class="btn btn-primary mt-2" style="background-color: plum; border-color: plum; color: black; padding-left: 30px; padding-right: 30px;">Volver al inicio</a>
+        </div>
+    </div>
+</div>
+
+
+<br>
+<br>
 {% endblock contenido %}

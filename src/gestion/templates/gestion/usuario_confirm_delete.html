@@ -1,12 +1,22 @@
 {% extends 'core/base.html' %}
+{% load static %}
 
 {% block contenido %}
-    <h1>Eliminar Usuario</h1>
-    <p>¿Está seguro que desea eliminar el usuario {{object.usuario}}</p>
-    <form method="post">
-        {% csrf_token %}
-        <button type="submit">Si, confirmo</button>
-    </form>
 
-    <a href="{% url 'gestion:usuario_list' %}"><button>Volver a Usuarios</button></a>
+<div class="container px-4 px-lg-5">
+    <div class="row justify-content-center my-5">
+        <div class="col-lg-8 text-center">
+            <h4 class="display-4 mb-4">Eliminar Usuario</h4>
+            <p>¿Está seguro que desea eliminar el usuario {{object.usuario}}?</p>
+        </div>
+        <div class="col-lg-8 text-center">
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-primary mt-2" style="background-color: black; border-color: black;">Sí, confirmo</button>
+                <a href="{% url 'gestion:usuario_list' %}" class="btn btn-primary mt-2" style="background-color: plum; border-color: plum; color: black; text-decoration: none; padding-left: 30px; padding-right: 30px;">Volver a Miembros</a>
+            </form>
+        </div>
+    </div>
+</div>
+
 {% endblock contenido %}

@@ -1,21 +1,51 @@
 {% extends 'core/base.html' %}
+{% load static %}
+
 
 {% block contenido %}
-{% load humanize %}
-    <h1>Detalle Usuario</h1>
 
-    <ul>
-        <li><strong>Nombre:</strong> {{object.usuario}}</li>
-        <li><strong>DNI:</strong> {{object.dni}}</li>
-        <li><strong>Fecha de Nacimiento:</strong> {{object.fecha_nacimiento}}</li>
-        <li><strong>Edad:</strong> {{object.calcular_edad}}</li>
-        <li><strong>Foto: </strong>
-            {% if object.foto %}
-            <img src="{{ object.foto.url }}" alt="Foto" class="img-fluid rounded" style="max-width: 200px;">
-        {% else %}
-            <em>Sin avatar</em>
-        {% endif %}
-        </li>
-    <br>
-    <a href="{% url 'gestion:usuario_list' %}"><button>Volver a Usuarios</button></a>
+<div class="container px-4 px-lg-5">
+    <div class="row justify-content-center my-5">
+        <div class="col-lg-8 text-center">
+            <h4 class="display-4 mb-4">Datos Personales</h4>
+        </div>
+
+        <div class="container px-4 px-lg-5 my-5">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <strong>Nombre:</strong> {{ object.usuario }}
+                        </li>
+                        <li class="list-group-item">
+                            <strong>DNI:</strong> {{ object.dni }}
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Fecha de Nacimiento:</strong> {{ object.fecha_nacimiento }}
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Edad:</strong> {{ object.calcular_edad }}
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Foto:</strong>
+                            <div class="mt-2">
+                                {% if object.foto %}
+                                    <img src="{{ object.foto.url }}" alt="Foto" class="img-fluid rounded" style="max-width: 200px;margin-left: 50px;">
+                                {% else %}
+                                    <em>Sin avatar</em>
+                                {% endif %}
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-lg-8 mt-4">
+            <a href="{% url 'gestion:usuario_list' %}" class="btn btn-primary mt-2" style="background-color: plum; border-color: plum; color: black; padding-left: 30px; padding-right: 30px;">Volver a Miembros</a>
+        </div>
+
+    </div>
+</div>           
+
 {% endblock contenido %}
