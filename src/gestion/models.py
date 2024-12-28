@@ -1,6 +1,8 @@
 from django.db import models
-from datetime import datetime
+from datetime import datetime, date
 from django.contrib.auth.models import User
+from django.db.models import Sum
+from calendar import monthrange
 
 TIPOS_TRANSACCIONES =[("I","Ingreso"),("G","Gasto")]
 
@@ -22,6 +24,7 @@ TIPOS_INFORME = [
 PERIODOS = [
         ('MENSUAL', 'Mensual'),
         ('TRIMESTRAL', 'Trimestral'),
+        ('SEMESTRAL', 'Semestre'),
         ('ANUAL', 'Anual'),
     ]
 
@@ -64,3 +67,76 @@ class Informe(models.Model):
 
     class Meta():
         unique_together = ("año","tipo","periodo")
+    
+    def calcular_totales_periodo(self):
+        if self.periodo == 'MENSUAL':
+             return self._calcular_totales_mensuales(1)
+
+        elif self.periodo == 'TRIMESTRAL':
+            # Últimos 3 meses
+            return self._calcular_totales_mensuales(3)
+        
+        elif self.periodo == 'SEMESTRAL':
+            # Últimos 6 meses
+            return self._calcular_totales_mensuales(3)
+
+        elif self.periodo == 'ANUAL':
+            # Últimos 12 meses
+            return self._calcular_totales_mensuales(12)
+
+        return []
+
+    def _calcular_totales_mensuales(self, meses):
+        hoy = date.today()
+        totales = []
+        for i in range(meses):
+            mes = (hoy.month - i - 1) % 12 + 1
+            año = hoy.year - ((hoy.month - i - 1) // 12)
+            inicio_mes = date(año, mes, 1)
+            _, fin_dia = monthrange(año, mes)
+            fin_mes = date(año, mes, fin_dia)
+            ingresos, gastos, total = self._calcular_total_rango(inicio_mes, fin_mes)
+            totales.append((inicio_mes.strftime("%b %Y"), ingresos, gastos, total))
+        totales.reverse()
+        return totales
+
+    def _calcular_total_rango(self, inicio, fin):
+        suma_ingresos = 0
+        suma_gastos = 0
+        total = 0
+        total = 0
+        if self.tipo == 'ING':  # Ingresos
+            total = Transaccion.objects.filter(
+                nombre=self.nombre,
+                tipo='I',
+                fecha__range=[inicio, fin]
+            )
+            suma_total = total.aggregate(total=Sum('monto'))['total'] or 0
+            return suma_total, 0, suma_total
+        
+        elif self.tipo == 'GAS':  # Gastos
+            total = Transaccion.objects.filter(
+                nombre=self.nombre,
+                tipo='G',
+                fecha__range=[inicio, fin]
+            )
+            suma_total = total.aggregate(total=Sum('monto'))['total'] or 0
+            return 0, suma_total, suma_total
+        
+        elif self.tipo == 'BAL':  # Balance
+            ingresos = Transaccion.objects.filter(
+                nombre=self.nombre,
+                tipo='I',
+                fecha__range=[inicio, fin]
+            )
+            suma_ingresos = ingresos.aggregate(total=Sum('monto'))['total'] or 0
+            gastos = Transaccion.objects.filter(
+                nombre=self.nombre,
+                tipo='G',
+                fecha__range=[inicio, fin]
+            )
+            suma_gastos = gastos.aggregate(total=Sum('monto'))['total'] or 0
+            suma_total = suma_ingresos- suma_gastos
+            return suma_ingresos, suma_gastos, suma_total
+        else:
+            return 0,0,0

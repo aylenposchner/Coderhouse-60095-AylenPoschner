@@ -2,13 +2,55 @@
 
 {% block contenido %}
 {% load humanize %}
-    <h1>Detalle Transacción</h1>
+    <h1>Detalle Informe</h1>
 
     <ul>
         <li><strong>Nombre:</strong> {{object.nombre}}</li>
         <li><strong>Año:</strong> {{object.año}}</li>
         <li><strong>Informe:</strong> {{object.informe}}</li>
         <li><strong>Periodo: </strong>{{object.get_periodo_display}}</li>
-     <br>
+    </ul>
+    <p>{{etiquetas}}</p>
+    <P>{{total}}</P>
+
+    <!-- Gráfico -->
+    {% if etiquetas and total %}
+    <h2>Gráfico de {{ object.informe }}</h2>
+    <canvas id="grafico" width="300" height="100"></canvas>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const ctx = document.getElementById('grafico').getContext('2d');
+
+        const etiqueta = {{ etiquetas|safe }};
+        const totales = {{ total|safe }};
+
+        const data = {
+            labels: etiqueta,
+            datasets: [{
+                label: 'Totales por {{ object.get_periodo_display }}',
+                data: totales,
+                backgroundColor: 'rgba(75, 192, 192, 1)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }]
+        };
+
+        new Chart(ctx, {
+            type: 'bar',
+            data: data,
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+    {% else %}
+        <p>No hay datos disponibles para mostrar en el gráfico.</p>
+    {% endif %}
+    <br>
     <a href="{% url 'gestion:informe_list' %}"><button>Volver a Informes</button></a>
 {% endblock contenido %}
