@@ -1,25 +1,30 @@
 {% extends 'core/base.html' %}
+{% load static %}
 
 {% block contenido %}
-    <h1>Bienvenido</h1>
-    <div>
-        <a href="{% url 'gestion:usuario_list' %}"><button>Mostrar Usuarios</button></a>
-        <a href="{% url 'gestion:transaccion_list' %}"><button>Mostrar Transacciones</button></a>
-        <a href="{% url 'gestion:informe_list' %}"><button>Mostrar Informes</button></a>
-    </div>
-    <br>
-    <div>
-        <form action="{% url 'core:perfil' %}" method="post">
-            {% csrf_token %}
-            <button type="submit" style="background:none;border:none;color: blueviolet;">Modificar Usuario</button>
-        </form>
-    </div>
 
-    <div>
-        <form action="{% url 'core:logout' %}" method="post">
-            {% csrf_token %}
-            <button type="submit" style="background:none;border:none;color: blueviolet;">Cerrar Sesión</button>
-        </form>
+<div class="container px-4 px-lg-5">
+    <!-- Heading Row-->
+    <div class="row gx-4 gx-lg-5 align-items-center my-5">
+        <div class="col-lg-7">
+            <img src="{% static 'core/img/imagen.webp' %}" alt="imagen" class="img-fluid rounded shadow-lg" style="width: 450px; height: 450px;margin-left: 150px;">
+        </div>
+        <div class="col-lg-5">
+            <h1 class="font-weight-light" style="margin-right: 150px;">Gestión Financiera Familiar</h1>
+            <p style="margin-right: 150px;">Bienvenido a la herramienta que te permite visualizar los ingresos y gastos tuyos y de tu familia de manera simple y práctica.</p>
+        </div>
     </div>
+</div>
+
+<div class="row g-4">
+    {% url 'gestion:usuario_list' as ruta_usuario_list %}
+    {% include 'core/componentes/card.html' with titulo="Usuarios" contenido="Ingrese para ver los miembros de su familia" ruta=ruta_usuario_list %}
+
+    {% url 'gestion:transaccion_list' as ruta_transaccion_list %}
+    {% include 'core/componentes/card.html' with titulo="Operaciones" contenido="Ingrese para ver los ingresos y gastos ingresados por cada miembro" ruta=ruta_transaccion_list %}
+
+    {% url 'gestion:informe_list' as ruta_informe_list %}
+    {% include 'core/componentes/card.html' with titulo="Informes" contenido="Ingrese para ver los resumenes de Ingresos y Gastos" ruta=ruta_informe_list %}
+</div>
 
 {% endblock contenido %}

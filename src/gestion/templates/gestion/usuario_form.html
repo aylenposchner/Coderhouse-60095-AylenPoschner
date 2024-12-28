@@ -1,7 +1,12 @@
 {% extends 'core/base.html' %}
 
 {% block contenido %}
+    {% if form.instance.pk %}
+    <h1>Modificar Usuario</h1>
+    {% else %}
     <h1>Crear Usuario</h1>
+    {% endif %}
+    
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}

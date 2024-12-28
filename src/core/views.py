@@ -12,7 +12,6 @@ from django.utils.decorators import method_decorator
 def inicio(request: HttpRequest) -> HttpResponse:
     return render(request, "core/inicio.html")
 
-@login_not_required
 def index(request: HttpRequest) -> HttpResponse:
     return render(request, "core/index.html")
 
@@ -22,7 +21,8 @@ def about(request: HttpRequest) -> HttpResponse:
 
 class CustomLoginView(LoginView):
     authentication_form = CustomAuthenticationForm
-    next_page = reverse_lazy('core:index')
+    template_name = 'core/login.html'
+    success_url = reverse_lazy('core:index')
 
 @method_decorator(login_not_required, name='dispatch')
 class CustomRegisterView(CreateView):

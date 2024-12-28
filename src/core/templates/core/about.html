@@ -1,6 +1,33 @@
 {% extends 'core/base.html' %}
+{% load static %}
 
 {% block contenido %}
 
-    
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 text-center">
+            <h1 class="display-4 mb-4">Acerca de mí</h1>
+            <div class="mb-4">
+                <img src="{% static 'core/img/perfil.jpg' %}" alt="Foto de perfil"
+                     class="img-fluid rounded-circle shadow-lg" style="max-width: 200px;">
+            </div>
+            <p class="lead mb-4">¡Hola! Me llamo Aylen Poschner y soy Contadora Publica. Nunca había hecho nada de programación, asi que los invito a conocer mi primer proyecto!</p>
+            
+            <p class="lead mb-4">Este proyecto está inspirado en una planilla de Excel que llevaba cuando era chica para tener registro de mis ingresos y gastos y de su evolución.</p>
+        </div>
+    </div>
+</div>
+<div class="container py-5">
+    <h5>Conecta Conmigo</h5>
+    <p>Linkedin: Linkedin.com/AylenPoschner</p>
+    <p>Repositorio del Proyecto: <a href="https://github.com/aylenposchner/Coderhouse-60095-AylenPoschner.git" target="_blank">https://github.com/aylenposchner/Coderhouse-60095-AylenPoschner.git</a></p>
+</div>
+
+<div class="container py-5">
+    <h5>Acerca del Curso</h5>
+    <p>Curso Corderhouse: Python</p>
+    <p>Comisión: 60095</p>
+    <P>Profesor: Esteban Acevedo</P>
+    <p>Tutor: Nicolas Dziuma</p>
+</div>
 {% endblock contenido %}
