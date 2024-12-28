@@ -1,8 +1,21 @@
 {% extends 'core/base.html' %}
 
 {% block contenido %}
-    <p> Has cerrado sesión</p>
-    <p> ¿Desea volver a ingreasar?
-        <a href="{% url 'core:login' %}">Iniciar sesión</a>
-    </p>
-{% endblock contenido %}<p> Has cerrado sesión</p>
+<div class="row justify-content-center">
+    <div class="col-md-6 col-lg-5">
+        <div class="card shadow-lg">
+            <div class="card-body p-5">
+                <div class="text-center mb-4">
+                    <h2 class="fw-bold">Ha cerrado Sesión</h2>
+                    <br>
+                    <p class="text-muted">Esperamos que haya tenido una buena experiencia</p>
+                    <br>
+                    <p class="text-muted">Inicie sesión para ingresar nuevamente</p>
+                <a href="{% url 'core:login' %}">Iniciar sesión</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock contenido %}
