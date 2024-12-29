@@ -12,7 +12,7 @@
         </div>
 
         <div class="col-lg-8">
-            <a href="{% url 'gestion:transaccion_create' %}" class="btn btn-primary mt-2" style="background-color: plum; border-color: plum; color: black; padding-left: 30px; padding-right: 30px;">Cargar Operación</a>
+            <a href="{% url 'gestion:transaccion_create' %}" class="btn btn-primary mt-2" style="background-color: lightblue; border-color: lightblue; color: black; padding-left: 30px; padding-right: 30px;">Cargar Operación</a>
         </div>
 
         <div class="col-lg-8 text-center mt-4">
@@ -29,9 +29,9 @@
                             <tr>
                                 <td style="text-align: left;">{{ object.nombre }} | {{ object.get_tipo_display}} | {{ object.monto|intcomma }} | {{ object.get_categoria_display }} </td>
                                 <td>
-                                    <a href="{% url 'gestion:transaccion_update' object.id %}" class="btn btn-warning btn-sm" style="background-color:plum;border-color: plum; color: black;">Editar</a>
-                                    <a href="{% url 'gestion:transaccion_detail' object.id %}" class="btn btn-info btn-sm" style="background-color:plum;border-color: plum;color: black;">Ver</a>
-                                    <a href="{% url 'gestion:transaccion_delete' object.id %}" class="btn btn-danger btn-sm" style="background-color: plum;border-color: plum;color: black;">Eliminar</a>
+                                    <a href="{% url 'gestion:transaccion_update' object.id %}" class="btn btn-warning btn-sm" style="background-color: lightblue;border-color:lightblue; color: black;">Editar</a>
+                                    <a href="{% url 'gestion:transaccion_detail' object.id %}" class="btn btn-info btn-sm" style="background-color:lightblue;border-color:lightblue;color: black;">Ver</a>
+                                    <a href="{% url 'gestion:transaccion_delete' object.id %}" class="btn btn-danger btn-sm" style="background-color:lightblue;border-color:lightblue;color: black;">Eliminar</a>
                                 </td>
                             </tr>
                         {% empty %}
@@ -44,7 +44,7 @@
             </div>
         </div>
         <div class="col-lg-8 mt-4">
-            <a href="{% url 'core:index' %}" class="btn btn-primary mt-2" style="background-color: plum; border-color: plum; color: black; padding-left: 30px; padding-right: 30px;">Volver al inicio</a>
+            <a href="{% url 'core:index' %}" class="btn btn-primary mt-2" style="background-color: lightblue; border-color:lightblue; color: black; padding-left: 30px; padding-right: 30px;">Volver al inicio</a>
         </div>
     </div>
 </div>

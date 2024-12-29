@@ -48,11 +48,11 @@ class Usuario(models.Model):
         return self.usuario.username
 
 class Transaccion(models.Model):
-    nombre = models.ForeignKey(Usuario,on_delete=models.DO_NOTHING)
+    nombre = models.ForeignKey(User,on_delete=models.DO_NOTHING)
     tipo = models.CharField(max_length=1,choices=TIPOS_TRANSACCIONES)
     monto = models.DecimalField(max_digits=10,decimal_places=2)
     categoria = models.CharField(max_length=50,choices=CATEGORIAS,default="O")
-    descripcion = models.TextField(max_length=50,null=True,blank=True)
+    descripcion = models.TextField(max_length=30,null=True,blank=True)
     fecha = models.DateField(null=True,blank=True)
 
     class Meta:
@@ -61,7 +61,7 @@ class Transaccion(models.Model):
         ordering = ("-fecha",)
 
 class Informe(models.Model):
-    nombre = models.ForeignKey(Usuario,on_delete=models.CASCADE,null=True)
+    nombre = models.ForeignKey(User,on_delete=models.CASCADE,null=True)
     año = models.PositiveIntegerField()
     informe = models.CharField(max_length=25)
     tipo = models.CharField(max_length=3,choices=TIPOS_INFORME,default='BAL')
@@ -70,7 +70,7 @@ class Informe(models.Model):
     mes_fin = models.PositiveIntegerField(default=12)    
 
     class Meta():
-        unique_together = ("año","tipo","periodo")
+        unique_together = ("año","tipo","periodo","mes_inicio","mes_fin")
 
     def clean(self):
         """Valida que mes_inicio y mes_fin sean valores lógicos."""

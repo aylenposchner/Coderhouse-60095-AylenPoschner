@@ -11,7 +11,7 @@
         </div>
 
         <div class="col-lg-8">
-            <a href="{% url 'gestion:informe_create' %}" class="btn btn-primary mt-2" style="background-color: plum; border-color: plum; color: black; padding-left: 30px; padding-right: 30px;">Crear Informe</a>
+            <a href="{% url 'gestion:informe_create' %}" class="btn btn-primary mt-2" style="background-color: lightgreen; border-color: lightgreen; color: black; padding-left: 30px; padding-right: 30px;">Crear Informe</a>
         </div>
 
         <div class="col-lg-8 text-center mt-4">
@@ -32,9 +32,9 @@
                                 <td style="text-align: left;">{{ object.informe }}</td>
                                 <td>{{ object.año }}</td>
                                 <td>
-                                    <a href="{% url 'gestion:informe_update' object.id %}" class="btn btn-warning btn-sm" style="background-color:plum;border-color: plum; color: black;">Editar</a>
-                                    <a href="{% url 'gestion:informe_detail' object.id %}" class="btn btn-info btn-sm" style="background-color:plum;border-color: plum;color: black;">Ver</a>
-                                    <a href="{% url 'gestion:informe_delete' object.id %}" class="btn btn-danger btn-sm" style="background-color: plum;border-color: plum;color: black;">Eliminar</a>
+                                    <a href="{% url 'gestion:informe_update' object.id %}" class="btn btn-warning btn-sm" style="background-color:lightgreen;border-color: lightgreen; color: black;">Editar</a>
+                                    <a href="{% url 'gestion:informe_detail' object.id %}" class="btn btn-info btn-sm" style="background-color:lightgreen;border-color: lightgreen;color: black;">Ver</a>
+                                    <a href="{% url 'gestion:informe_delete' object.id %}" class="btn btn-danger btn-sm" style="background-color: lightgreen;border-color: lightgreen;color: black;">Eliminar</a>
                                 </td>
                             </tr>
                         {% empty %}
@@ -47,7 +47,7 @@
             </div>
         </div>
         <div class="col-lg-8 mt-4">
-            <a href="{% url 'core:index' %}" class="btn btn-primary mt-2" style="background-color: plum; border-color: plum; color: black; padding-left: 30px; padding-right: 30px;">Volver al inicio</a>
+            <a href="{% url 'core:index' %}" class="btn btn-primary mt-2" style="background-color: lightgreen; border-color: lightgreen; color: black; padding-left: 30px; padding-right: 30px;">Volver al inicio</a>
         </div>
     </div>
 </div>

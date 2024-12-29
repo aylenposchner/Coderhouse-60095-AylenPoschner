@@ -7,11 +7,23 @@ from django.contrib import messages
 
 class UsuarioListView(ListView):
     model = Usuario
+    def get_queryset(self):
+    # Si el usuario es staff, muestra todas las transacciones
+        if self.request.user.is_staff:
+            return Usuario.objects.all()
+    # Si no, solo las del usuario actual
+        return Usuario.objects.filter(usuario=self.request.user)
 
 class UsuarioCreateView(CreateView):
     model = Usuario
     form_class = UsuarioForm
     success_url = reverse_lazy("gestion:usuario_list")
+    def get_queryset(self):
+    # Si el usuario es staff, muestra todas las transacciones
+        if self.request.user.is_staff:
+            return Usuario.objects.all()
+    # Si no, solo las del usuario actual
+        return Usuario.objects.filter(usuario=self.request.user)
 
     def form_valid(self, form):
         messages.success(self.request, 'Usuario creado exitosamente')
@@ -21,6 +33,12 @@ class UsuarioUpdateView(UpdateView):
     model = Usuario
     form_class = UsuarioForm
     success_url = reverse_lazy("gestion:usuario_list")
+    def get_queryset(self):
+    # Si el usuario es staff, muestra todas las transacciones
+        if self.request.user.is_staff:
+            return Usuario.objects.all()
+    # Si no, solo las del usuario actual
+        return Usuario.objects.filter(usuario=self.request.user)
     
     def form_valid(self, form):
         messages.success(self.request, 'Usuario actualizado exitosamente')
