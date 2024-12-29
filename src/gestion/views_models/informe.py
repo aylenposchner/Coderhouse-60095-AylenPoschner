@@ -9,15 +9,36 @@ class InformeListView(ListView):
     template_name = "gestion/informe_list.html"
     context_object_name = "object_list"
 
+    def get_queryset(self):
+    # Si el usuario es staff, muestra todas las transacciones
+        if self.request.user.is_staff:
+            return Informe.objects.all()
+    # Si no, solo las del usuario actual
+        return Informe.objects.filter(nombre=self.request.user)
+
+    
 class InformeCreateView(CreateView):
     model = Informe
     form_class = InformeForm
     success_url = reverse_lazy("gestion:informe_list")
+    
+    def get_form_kwargs(self):
+        # Obtener los argumentos del formulario estándar
+        kwargs = super().get_form_kwargs()
+        # Agregar el usuario actual al formulario
+        kwargs['user'] = self.request.user      
+        return kwargs
 
 class InformeUpdateView(UpdateView):
     model = Informe
     form_class = InformeForm
     success_url = reverse_lazy("gestion:informe_list")
+    def get_queryset(self):
+    # Si el usuario es staff, muestra todas las transacciones
+        if self.request.user.is_staff:
+            return Informe.objects.all()
+    # Si no, solo las del usuario actual
+        return Informe.objects.filter(nombre=self.request.user)
 
 class InformeDetailView(DetailView):
     model = Informe

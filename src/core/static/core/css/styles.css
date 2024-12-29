@@ -10824,3 +10824,9 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
+
+textarea#id_descripcion {
+  height: 10px !important; /* Altura más pequeña */
+  resize: none !important; /* Deshabilitar el cambio de tamaño */
+  font-size: 12px !important; /* Tamaño de fuente ajustado */
+}
