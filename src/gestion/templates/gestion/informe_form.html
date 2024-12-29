@@ -1,11 +1,31 @@
 {% extends 'core/base.html' %}
+{% load static %}
+
 
 {% block contenido %}
-    <h1>Crear Informe</h1>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Guardar</button>
-    </form>
-    <a href="{% url 'gestion:informe_list' %}"><button>Volver a Informes</button></a>
+
+<div class="container px-4 px-lg-5">
+    <div class="row justify-content-center my-5">
+        <div class="col-lg-8 text-center">
+            {% if form.instance.pk %}
+            <h4 class="display-4 mb-4">Modificar Informe</h4>
+            {% else %}
+            <h4 class="display-4 mb-4">Crear Informe</h4>
+            {% endif %}
+        </div>
+        
+        <div class="container px-4 px-lg-5">
+            <form method="POST"  enctype="multipart/form-data" class="mx-5" style="max-width: 500px;">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-primary mt-2" style="background-color: black; border-color: black;">Guardar</button>
+
+                <a href="{% url 'gestion:informe_list' %}" class="btn btn-primary mt-2" style="background-color: plum; border-color: plum; color: black; text-decoration: none; padding-left: 30px; padding-right: 30px;">
+                    Volver a Informes
+                </a>
+            </form>
+        </div>
+    </div>
+</div>           
+
 {% endblock contenido %}

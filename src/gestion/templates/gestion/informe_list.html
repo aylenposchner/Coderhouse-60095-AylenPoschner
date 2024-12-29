@@ -1,41 +1,55 @@
 {% extends 'core/base.html' %}
+{% load static %}
+
 
 {% block contenido %}
-    <h1 style="margin-top: 30px;text-align: center;">Lista de Informes</h1>
-<!-- 
-    <form action="" method="get">
-        <input type="text", name="busqueda", placeholder="Buscar categoría...">
-    </form>
-     -->
-    <a href="{% url 'gestion:informe_create' %}"><button style="background-color:lightgreen; color:black;border-color: lightgreen;">Crear Informe</button></a>
-    <table>
-        <thead>
-            <tr style="text-align: center;"> 
-                <th>Nombre</th>
-                <th>Informe</th>
-                <th>Año</th>
-                <th>Acción</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for object in object_list %}
-                <tr style="text-align: center;">
-                    <td>{{ object.nombre }}</td>
-                    <td style="text-align: left">{{ object.informe}}</td>
-                    <td>{{ object.año}}</td>
-                    <td>
-                        <a href="{% url 'gestion:informe_detail' object.id %}" style="color: forestgreen;">Ver | </a>
-                        <a href="{% url 'gestion:informe_update' object.id %}" style="color: forestgreen;">Editar | </a>
-                        <a href="{% url 'gestion:informe_delete' object.id %}" style="color: forestgreen;">Eliminar</a>
-                    </td>
-                </tr    >
-            {% empty %}
-                <tr>
-                    <td>No hay datos disponibles.</td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
 
-    <a href="{% url 'core:index' %}"><button style="background-color:lightgreen; color:black;border-color: lightgreen;">Volver al inicio</button></a>
+<div class="container px-4 px-lg-5">
+    <div class="row justify-content-center my-5">
+        <div class="col-lg-8 text-center">
+            <h4 class="display-4 mb-4">Lista de Informes</h4>
+        </div>
+
+        <div class="col-lg-8">
+            <a href="{% url 'gestion:informe_create' %}" class="btn btn-primary mt-2" style="background-color: plum; border-color: plum; color: black; padding-left: 30px; padding-right: 30px;">Crear Informe</a>
+        </div>
+
+        <div class="col-lg-8 text-center mt-4">
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Informe</th>
+                            <th>Año</th>
+                            <th>Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for object in object_list %}
+                            <tr>
+                                <td>{{ object.nombre }}</td>
+                                <td style="text-align: left;">{{ object.informe }}</td>
+                                <td>{{ object.año }}</td>
+                                <td>
+                                    <a href="{% url 'gestion:informe_update' object.id %}" class="btn btn-warning btn-sm" style="background-color:plum;border-color: plum; color: black;">Editar</a>
+                                    <a href="{% url 'gestion:informe_detail' object.id %}" class="btn btn-info btn-sm" style="background-color:plum;border-color: plum;color: black;">Ver</a>
+                                    <a href="{% url 'gestion:informe_delete' object.id %}" class="btn btn-danger btn-sm" style="background-color: plum;border-color: plum;color: black;">Eliminar</a>
+                                </td>
+                            </tr>
+                        {% empty %}
+                            <tr>
+                                <td colspan="4" class="text-center">No hay datos disponibles</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-lg-8 mt-4">
+            <a href="{% url 'core:index' %}" class="btn btn-primary mt-2" style="background-color: plum; border-color: plum; color: black; padding-left: 30px; padding-right: 30px;">Volver al inicio</a>
+        </div>
+    </div>
+</div>
+
 {% endblock contenido %}

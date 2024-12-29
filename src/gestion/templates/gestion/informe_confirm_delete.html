@@ -1,6 +1,25 @@
 {% extends 'core/base.html' %}
+{% load static %}
 
 {% block contenido %}
+
+<div class="container px-4 px-lg-5">
+    <div class="row justify-content-center my-5">
+        <div class="col-lg-8 text-center">
+            <h4 class="display-4 mb-4">Eliminar Informe</h4>
+            <p>¿Está seguro que desea eliminar el informe {{object.informe}} de {{object.nombre}}?</p>
+        </div>
+        <div class="col-lg-8 text-center">
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-primary mt-2" style="background-color: black; border-color: black;">Sí, confirmo</button>
+                <a href="{% url 'gestion:informe_list' %}" class="btn btn-primary mt-2" style="background-color: plum; border-color: plum; color: black; text-decoration: none; padding-left: 30px; padding-right: 30px;">Volver a Informe</a>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- 
     <h1>Eliminar Informe</h1>
     <p>¿Está seguro que desea eliminar el informe {{object.informe}} de {{object.nombre}}</p>
     <form method="post">
@@ -8,5 +27,5 @@
         <button type="submit">Si, confirmo</button>
     </form>
 
-    <a href="{% url 'gestion:informe_list' %}"><button>Volver a Informes</button></a>
+    <a href="{% url 'gestion:informe_list' %}"><button>Volver a Informes</button></a> -->
 {% endblock contenido %}
