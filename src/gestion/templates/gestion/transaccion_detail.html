@@ -1,7 +1,56 @@
 {% extends 'core/base.html' %}
+{% load static %}
+{% load humanize %}
+
 
 {% block contenido %}
-{% load humanize %}
+
+<div class="container px-4 px-lg-5">
+    <div class="row justify-content-center my-5">
+        <div class="col-lg-8 text-center">
+            <h4 class="display-4 mb-4">Datos de la Operación</h4>
+        </div>
+
+        <div class="container px-4 px-lg-5 my-5">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <strong>Nombre:</strong> {{ object.nombre }}
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Operación:</strong> {{ object.get_tipo_display }}
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Monto:</strong> {{ object.monto|intcomma }}
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Fecha:</strong> {{ object.fecha }}
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Categoría:</strong> {{ object.get_categoria_display }}
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Descripción:</strong>
+                                {% if object.descripcion %}
+                                    {{ object.descripcion }}                        
+                                {% else %}
+                                    <em>Sin descripción</em>
+                                {% endif %}
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-lg-8 mt-4">
+            <a href="{% url 'gestion:transaccion_list' %}" class="btn btn-primary mt-2" style="background-color: plum; border-color: plum; color: black; padding-left: 30px; padding-right: 30px;">Volver a Operaciones</a>
+        </div>
+
+    </div>
+</div>           
+
+<!-- 
     <h1>Detalle Transacción</h1>
 
     <ul>
@@ -17,5 +66,5 @@
                 -
             {% endif %}</li>
     <br>
-    <a href="{% url 'gestion:transaccion_list' %}"><button>Volver a transacciones</button></a>
+    <a href="{% url 'gestion:transaccion_list' %}"><button>Volver a transacciones</button></a> -->
 {% endblock contenido %}
